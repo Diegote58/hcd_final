@@ -1,4 +1,4 @@
-package com.hendrysuwanda.springmvc.thymeleaf.gentelella.config;
+package com.sistema.config;
 
 import java.util.List;
 

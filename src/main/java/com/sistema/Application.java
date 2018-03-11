@@ -1,4 +1,4 @@
-package com.hendrysuwanda.springmvc.thymeleaf.gentelella;
+package com.sistema;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
