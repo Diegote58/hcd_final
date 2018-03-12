@@ -8,8 +8,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import com.sistema.entity.User;
 
-@Repository("userRepository")
-public interface UserRepository extends JpaRepository<User, Serializable>{
+@Repository
+public interface UsuarioRepository extends JpaRepository<User, Serializable>{
 
 	public User findByUsername(String username);
 

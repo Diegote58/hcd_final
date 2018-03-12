@@ -16,20 +16,20 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.sistema.entity.UserRol;
 import com.sistema.entity.User;
-import com.sistema.repository.UserRepository;
+import com.sistema.entity.UserRol;
+import com.sistema.repository.UsuarioRepository;
 
-@Service("userService")
-public class UserService implements UserDetailsService {
+@Service
+public class UsuarioService implements UserDetailsService {
 
 	@Resource
-	private UserRepository userRepository;
+	private UsuarioRepository usuarioRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		User us = userRepository.findByUsername(username);
+		User us = usuarioRepository.findByUsername(username);
 //		User us = userRepository.getByUsername(username);
 		
 		if (us == null)

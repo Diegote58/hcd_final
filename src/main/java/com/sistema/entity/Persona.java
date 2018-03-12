@@ -2,21 +2,28 @@ package com.sistema.entity;
 
 
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.DiscriminatorFormula;
 import org.springframework.context.annotation.Scope;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sistema.entity.consulta.Consulta;
+
 @Entity
 @Table(name = "persona")
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorFormula("CASE WHEN TYPE IN ('Administrador', 'Profesional', 'Enfermero', 'Administrativo', 'Paciente') THEN TYPE ELSE 'Persona'")
 public class Persona{
 
 	@Id
@@ -33,12 +40,30 @@ public class Persona{
 	private Date fechaNacimiento;
 	private Date fechaAlta;
 	private Date fechaMuerte;
+	private String grupoSanguineo;
+	private String estadoCivil;
 	private String estado;
 	private String domicilio;
 	private String ciudad;
 	private String provincia;
 	private String pais;
 	
+	@OneToOne(mappedBy = "persona")	
+	private Profesional profesional;
+	
+	@OneToMany(mappedBy = "persona")
+	private List<Consulta> consultas;
+	
+	private Integer createdBy;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@JsonIgnore
+	private Date dateCreated;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@JsonIgnore
+	private Date dateModified;
+
 	
 	public int getId() {
 		return id;
@@ -183,7 +208,62 @@ public class Persona{
 	public void setPais(String pais) {
 		this.pais = pais;
 	}
-	
-	
 
+	public String getGrupoSanguineo() {
+		return grupoSanguineo;
+	}
+
+	public void setGrupoSanguineo(String grupoSanguineo) {
+		this.grupoSanguineo = grupoSanguineo;
+	}
+
+	public String getEstadoCivil() {
+		return estadoCivil;
+	}
+
+	public void setEstadoCivil(String estadoCivil) {
+		this.estadoCivil = estadoCivil;
+	}
+
+	public List<Consulta> getConsultas() {
+		return consultas;
+	}
+
+	public void setConsultas(List<Consulta> consultas) {
+		this.consultas = consultas;
+	}
+
+	public Profesional getProfesional() {
+		return profesional;
+	}
+
+	public void setProfesional(Profesional profesional) {
+		this.profesional = profesional;
+	}
+
+	public Integer getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(Integer createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Date getDateCreated() {
+		return dateCreated;
+	}
+
+	public void setDateCreated(Date dateCreated) {
+		this.dateCreated = dateCreated;
+	}
+
+	public Date getDateModified() {
+		return dateModified;
+	}
+
+	public void setDateModified(Date dateModified) {
+		this.dateModified = dateModified;
+	}
+	
+	
 }

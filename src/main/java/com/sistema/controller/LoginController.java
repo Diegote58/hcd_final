@@ -49,28 +49,5 @@ public class LoginController {
 			return "login";
 	}
 	
-	@GetMapping("/index1")
-	public String index1() {
-		LOGGER.info("METHOD: loginCheck()");
-		LOGGER.info("Returning to contacts view");
-		// return ViewConstant.CONTACTS;
-		return "index1";
-	}
-	
-	@GetMapping("/index2")
-	public String index2() {
-		LOGGER.info("METHOD: loginCheck()");
-		LOGGER.info("Returning to contacts view");
-		// return ViewConstant.CONTACTS;
-		return "index2";
-	}
-	
-	@GetMapping("/index3")
-	public String index3() {
-		LOGGER.info("METHOD: loginCheck()");
-		LOGGER.info("Returning to contacts view");
-		// return ViewConstant.CONTACTS;
-		return "index3";
-	}
 
 }

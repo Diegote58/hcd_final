@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8"/>
+    <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
@@ -36,7 +36,7 @@
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                    <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+                    <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Centro de Salud</span></a>
                 </div>
 
                 <div class="clearfix"></div>
@@ -47,8 +47,8 @@
                         <img src="images/img.jpg" alt="..." class="img-circle profile_img">
                     </div>
                     <div class="profile_info">
-                        <span>Welcome,</span>
-                        <h2>John Doe</h2>
+                        <span>Bienvenido,</span>
+                        <h2>Diegote</h2>
                     </div>
                 </div>
                 <!-- /menu profile quick info -->
@@ -62,6 +62,7 @@
                         <ul class="nav side-menu">
                             <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
+                                 <li><a href="/persona/create">Persona</a></li>
                                     <li><a href="/index1">Dashboard</a></li>
                                     <li><a href="/index2">Dashboard2</a></li>
                                     <li><a href="/index3">Dashboard3</a></li>
@@ -334,5 +335,9 @@
 
 <!-- Custom Theme Scripts -->
 <script th:src="@{/build/js/custom.min.js}"></script>
+
+		<section layout:fragment="script-fragment">
+               
+        </section>
 </body>
 </html>
