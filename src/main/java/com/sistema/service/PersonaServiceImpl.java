@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.sistema.entity.Persona;
@@ -101,6 +103,11 @@ public class PersonaServiceImpl implements PersonaService{
 	@Override
 	public List<Persona> searchPersona(String search) {
 		return personaRepository.searchPersonas(search);
+	}
+
+	@Override
+	public Page<Persona> findAllPageable(PageRequest pageable) {
+		return personaRepository.findAll(pageable);
 	}
 
 }

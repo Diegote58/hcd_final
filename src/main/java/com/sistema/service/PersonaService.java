@@ -2,7 +2,11 @@ package com.sistema.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+
 import com.sistema.entity.Persona;
+import com.sistema.utils.Pager;
 
 public interface PersonaService {
 
@@ -36,5 +40,6 @@ public interface PersonaService {
 	
 	public List<Persona> searchPersona(String search);
 	
+	Page<Persona> findAllPageable(PageRequest pageable);
 	
 }

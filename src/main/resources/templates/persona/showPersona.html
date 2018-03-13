@@ -62,16 +62,17 @@
 
 		<div class="title_right">
 			<div class="col-md-8 col-sm-8 col-xs-12 form-group pull-right">
-				<div class="input-group">
-					<input id="searchInput" name="searchInput" type="text"
-						class="form-control" placeholder="nombre/apellido/dni...">
-					<span class="input-group-btn">
-						<button class="btn btn-default" type="button"
-							 id="searchButton">
-							<i class="fa fa-search"></i>
-						</button>
-					</span>
-				</div>
+				<form class="form-horizontal" id="search-form">
+					<div class="input-group">
+						<input id="search-person" type="text" class="form-control"
+							placeholder="nombre/apellido/dni..."> <span
+							class="input-group-btn">
+							<button type="submit" class="btn btn-primary" id="search-button">
+								<i class="fa fa-search"></i>
+							</button>
+						</span>
+					</div>
+				</form>
 			</div>
 		</div>
 
@@ -91,44 +92,73 @@
 				</div>
 				<div class="x_content">
 					<br />
-					<table class="table table-striped">
-						<thead>
-							<tr class="">
-								<th>Documento</th>
-								<th>Nombre</th>
-								<th>Estado</th>
-								<th>Acción</th>
-							</tr>
-						</thead>
-						<tbody th:fragment="personasResult" id="persona-search"
-							th:unless="${#lists.isEmpty(personas)}">
-							<!--  th:fragment="resultsList" th:unless="${#lists.isEmpty(guests)}" id="results-block" -->
-							<tr th:if="${#lists.isEmpty(personas)}" class="">
-								<td colspan="4" align="center">No existen Personas para la
-									busqueda.</td>
-							</tr>
-							<tr th:each="per : ${personas}">
-								<td th:text="${per.nroDocumento }"></td>
-								<td th:text="${per.nombre + ' ' + per.apellido1}"></td>
-								<td th:text="${per.estado}"></td>
-								<td align="center"><a
-									th:href="@{/persona/edit/{id}(id=${per.id})}"><span
-										class="glyphicon glyphicon-edit"></span></a> &nbsp; &nbsp; <a
-									th:href="@{/persona/delete/{id}(id=${per.id})}"><span
-										class="glyphicon glyphicon-trash"></span></a></td>
-							</tr>
+					<div th:fragment="personas-fragment" id="personas-block">
+						<table class="table table-striped">
+							<thead>
+								<tr class="">
+									<th>Documento</th>
+									<th>Nombre</th>
+									<th>Estado</th>
+									<th>Acción</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="per : ${personas}">
+									<td th:text="${per.nroDocumento }"></td>
+									<td th:text="${per.nombre + ' ' + per.apellido1}"></td>
+									<td th:text="${per.estado}"></td>
+									<td align="center"><a
+										th:href="@{/persona/edit/{id}(id=${per.id})}"><span
+											class="glyphicon glyphicon-edit"></span></a> &nbsp; &nbsp; <a
+										th:href="@{/persona/delete/{id}(id=${per.id})}"><span
+											class="glyphicon glyphicon-trash"></span></a></td>
+								</tr>
 
-						</tbody>
-					</table>
+							</tbody>
+
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
+	<!-- ROW PAGEABLE -->
+	<div class="row text-center">
+        <div class="form-group col-md-1">
+            <select class="form-control pagination pagination-lg" id="pageSizeSelect">
+                <option th:each="pageSize : ${pageSizes}" th:text="${pageSize}" th:value="${pageSize}"
+                        th:selected="${pageSize} == ${selectedPageSize}"></option>
+            </select>
+        </div>
+        <div th:if="${personas.totalPages != 1}" class="form-group col-md-11 pagination-centered">
+            <ul class="pagination pagination-lg">
+                <li th:class="${personas.number == 0} ? disabled">
+                    <a class="pageLink" th:href="@{/personas?(pageSize=${selectedPageSize}, page=1)}">&laquo;</a>
+                </li>
+                <li th:class="${personas.number == 0} ? disabled">
+                    <a class="pageLink" th:href="@{/personas?(pageSize=${selectedPageSize}, page=${personas.number})}">&larr;</a>
+                </li>
+                <li th:class="${personas.number == (page - 1)} ? 'active pointer-disabled'"
+                    th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
+                    <a class="pageLink" th:href="@{/personas?(pageSize=${selectedPageSize}, page=${page})}"
+                       th:text="${page}"></a>
+                </li>
+                <li th:class="${personas.number + 1 == personas.totalPages} ? disabled">
+                    <a class="pageLink"
+                       th:href="@{/personas?(pageSize=${selectedPageSize}, page=${personas.number + 2})}">&rarr;</a>
+                </li>
+                <li th:class="${personas.number + 1 == personas.totalPages} ? disabled">
+                    <a class="pageLink"
+                       th:href="@{/personas?(pageSize=${selectedPageSize}, page=${personas.totalPages})}">&raquo;</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+	<!-- END ROW PAGEABLE -->
 </section>
 
 <section layout:fragment="script-fragment">
-	
+	<script type="text/javascript" src="/build/js/main/searchPerson.js"></script>
 </section>
 
 
